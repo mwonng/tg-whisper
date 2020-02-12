@@ -23,13 +23,25 @@ const buttons = [
 
 function welcomeMsg(bot) {
   bot.on("new_chat_members", ctx => {
-    bot.telegram.sendMessage(
-      ctx.update.message.new_chat_participant.id,
-      title,
-      Markup.inlineKeyboard(buttons).extra()
-    );
-    //   .then(res => console.log(res))
-    //   .catch(e => console.log(e));
+    const {
+      id,
+      first_name,
+      last_name
+    } = ctx.update.message.new_chat_participant;
+    bot.telegram
+      .sendMessage(
+        ctx.update.message.new_chat_participant.id,
+        title,
+        Markup.inlineKeyboard(buttons).extra()
+      )
+      .then(
+        console.log(
+          `message sent to id: ${id} named ${first_name} ${last_name}`
+        )
+      )
+      .catch(
+        console.log(`failed sent to id: ${id} named ${first_name} ${last_name}`)
+      );
   });
   bot.start(ctx =>
     ctx.reply(
@@ -44,9 +56,20 @@ function welcomeMsg(bot) {
     )
   );
   bot.action("GROUP_RULE", ctx => {
-    bot.telegram.sendMessage(ctx.update.callback_query.from.id, announcement);
-    //   .then(res => console.log(res))
-    //   .catch(e => console.log(e));
+    const { id, first_name, last_name } = ctx.update.callback_query.from;
+    bot.telegram
+      .sendMessage(ctx.update.callback_query.from.id, announcement)
+      .then(
+        console.log(
+          `[callback] message sent to id: ${id} named ${first_name} ${last_name}`
+        )
+      )
+      .catch(e =>
+        console.log(
+          `[callback] failed sent to id: ${id} named ${first_name} ${last_name} with error:`,
+          e
+        )
+      );
   });
   bot.action("REDIRECT_TO_CHAT", ctx => ctx.reply("okey"));
 }
