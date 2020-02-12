@@ -7,7 +7,7 @@ const announcement = `
     - 同城互助 ✅
 2. 本群禁止：
     - 人身攻击 🚫
-    - 煽动危害他人或公共/私人财产 🚫
+    - 危害他人或公共/私人财产 🚫
     - 与疫情无关的话题 🚫
     - 明显无来源的虚假信息 🚫
 3. 投稿与放送事故提醒:
@@ -15,9 +15,23 @@ const announcement = `
     - 然后发送至: 📧 @mwonng
 4. 本群连接：https://t.me/joinchat/OElQrFZiBp5If1A90UCnsg
 `;
+const title = "歡迎來到疫情交流群,請先查看置頂信息並了解群規";
+const buttons = [
+  Markup.callbackButton("本群規定", "GROUP_RULE"),
+  Markup.urlButton("跳去水群", "https://t.me/joinchat/OElQrFKWIz_B1qtkNwE7qA")
+];
 
 function welcomeMsg(bot) {
-  bot.on("new_chat_members", ctx =>
+  bot.on("new_chat_members", ctx => {
+    bot.telegram.sendMessage(
+      ctx.update.message.new_chat_participant.id,
+      title,
+      Markup.inlineKeyboard(buttons).extra()
+    );
+    //   .then(res => console.log(res))
+    //   .catch(e => console.log(e));
+  });
+  bot.start(ctx =>
     ctx.reply(
       "歡迎來到疫情交流群,請先查看置頂信息並了解群規",
       Markup.inlineKeyboard([
@@ -31,6 +45,8 @@ function welcomeMsg(bot) {
   );
   bot.action("GROUP_RULE", ctx => {
     bot.telegram.sendMessage(ctx.update.callback_query.from.id, announcement);
+    //   .then(res => console.log(res))
+    //   .catch(e => console.log(e));
   });
   bot.action("REDIRECT_TO_CHAT", ctx => ctx.reply("okey"));
 }
