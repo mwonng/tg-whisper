@@ -28,6 +28,7 @@ function welcomeMsg(bot) {
       first_name,
       last_name
     } = ctx.update.message.new_chat_participant;
+
     bot.telegram
       .sendMessage(
         ctx.update.message.new_chat_participant.id,
@@ -43,6 +44,7 @@ function welcomeMsg(bot) {
         console.log(`failed sent to id: ${id} named ${first_name} ${last_name}`)
       );
   });
+
   bot.start(ctx =>
     ctx.reply(
       "歡迎來到疫情交流群,請先查看置頂信息並了解群規",
@@ -55,6 +57,7 @@ function welcomeMsg(bot) {
       ]).extra()
     )
   );
+
   bot.action("GROUP_RULE", ctx => {
     const { id, first_name, last_name } = ctx.update.callback_query.from;
     bot.telegram
@@ -71,7 +74,6 @@ function welcomeMsg(bot) {
         )
       );
   });
-  bot.action("REDIRECT_TO_CHAT", ctx => ctx.reply("okey"));
 }
 
 module.exports = welcomeMsg;
