@@ -10,7 +10,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.help(ctx => ctx.reply("Send me a sticker"));
 
 bot.command("wow", ctx => ctx.reply("you are wow"));
-// bot.on("sticker", ctx => ctx.reply("👍"));
+bot.on("sticker", ctx => ctx.reply("👍"));
 
 // bot.on("new_chat_members", ctx => ctx.reply("Welcome msg here"));
 
