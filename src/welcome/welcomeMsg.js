@@ -43,34 +43,34 @@ function welcomeMsg(bot) {
   //         console.log(`failed sent to id: ${id} named ${first_name} ${last_name}`)
   //       );
   //   });
-  //   bot.start(ctx =>
-  //     ctx.reply(
-  //       "歡迎來到疫情交流群,請先查看置頂信息並了解群規",
-  //       Markup.inlineKeyboard([
-  //         Markup.callbackButton("本群規定", "GROUP_RULE"),
-  //         Markup.urlButton(
-  //           "跳去水群",
-  //           "https://t.me/joinchat/OElQrFKWIz_B1qtkNwE7qA"
-  //         )
-  //       ]).extra()
-  //     )
-  //   );
-  //   bot.action("GROUP_RULE", ctx => {
-  //     const { id, first_name, last_name } = ctx.update.callback_query.from;
-  //     bot.telegram
-  //       .sendMessage(ctx.update.callback_query.from.id, announcement)
-  //       .then(
-  //         console.log(
-  //           `[callback] message sent to id: ${id} named ${first_name} ${last_name}`
-  //         )
-  //       )
-  //       .catch(e =>
-  //         console.log(
-  //           `[callback] failed sent to id: ${id} named ${first_name} ${last_name} with error:`,
-  //           e
-  //         )
-  //       );
-  //   });
+  bot.start(ctx =>
+    ctx.reply(
+      "歡迎來到疫情交流群,請先查看置頂信息並了解群規",
+      Markup.inlineKeyboard([
+        Markup.callbackButton("本群規定", "GROUP_RULE"),
+        Markup.urlButton(
+          "跳去水群",
+          "https://t.me/joinchat/OElQrFKWIz_B1qtkNwE7qA"
+        )
+      ]).extra()
+    )
+  );
+  bot.action("GROUP_RULE", ctx => {
+    const { id, first_name, last_name } = ctx.update.callback_query.from;
+    bot.telegram
+      .sendMessage(ctx.update.callback_query.from.id, announcement)
+      .then(
+        console.log(
+          `[callback] message sent to id: ${id} named ${first_name} ${last_name}`
+        )
+      )
+      .catch(e =>
+        console.log(
+          `[callback] failed sent to id: ${id} named ${first_name} ${last_name} with error:`,
+          e
+        )
+      );
+  });
 }
 
 module.exports = welcomeMsg;
