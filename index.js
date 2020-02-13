@@ -15,7 +15,7 @@ bot.on("sticker", ctx => ctx.reply("👍"));
 // bot.on("new_chat_members", ctx => ctx.reply("Welcome msg here"));
 
 welcome(bot);
-// bot.hears("hi", ctx => ctx.reply("Hey there"));
+bot.hears("hi", ctx => ctx.reply("Hey there"));
 // who(bot);
 
 bot.launch();
