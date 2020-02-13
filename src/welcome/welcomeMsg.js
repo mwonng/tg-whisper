@@ -22,28 +22,28 @@ const buttons = [
 ];
 
 function welcomeMsg(bot) {
-  bot.on("new_chat_members", ctx => {
-    const {
-      id,
-      first_name,
-      last_name
-    } = ctx.update.message.new_chat_participant;
+  //   bot.on("new_chat_members", ctx => {
+  //     const {
+  //       id,
+  //       first_name,
+  //       last_name
+  //     } = ctx.update.message.new_chat_participant;
 
-    bot.telegram
-      .sendMessage(
-        ctx.update.message.new_chat_participant.id,
-        title,
-        Markup.inlineKeyboard(buttons).extra()
-      )
-      .then(
-        console.log(
-          `message sent to id: ${id} named ${first_name} ${last_name}`
-        )
-      )
-      .catch(
-        console.log(`failed sent to id: ${id} named ${first_name} ${last_name}`)
-      );
-  });
+  //     bot.telegram
+  //       .sendMessage(
+  //         ctx.update.message.new_chat_participant.id,
+  //         title,
+  //         Markup.inlineKeyboard(buttons).extra()
+  //       )
+  //       .then(
+  //         console.log(
+  //           `message sent to id: ${id} named ${first_name} ${last_name}`
+  //         )
+  //       )
+  //       .catch(
+  //         console.log(`failed sent to id: ${id} named ${first_name} ${last_name}`)
+  //       );
+  //   });
 
   bot.start(ctx =>
     ctx.reply(
