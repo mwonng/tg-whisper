@@ -2,13 +2,13 @@ const Markup = require("telegraf/markup");
 const announcement = `
 ⚠️請認真閱讀並同意以下規定⚠️
 1. 本群鼓励并欢迎
-    - 与 *疫情有关* 新闻 ✅
-    - 与 *疫情有关* 新闻 ✅
-    - 同城互助 ✅
+    - 与疫情有关新闻及互助 ✅
+    - 与疫区有关事实陈述 ✅
+    - 为保护有效发言开启慢速模式
 2. 本群禁止：
     - 人身攻击 🚫
     - 危害他人或公共/私人财产 🚫
-    - 与疫情无关的话题 🚫
+    - 讨论与疫情无关的话题 🚫
     - 明显无来源的虚假信息 🚫
 3. 投稿与放送事故提醒:
     - 需提前编辑内容 📝
@@ -43,6 +43,7 @@ function welcomeMsg(bot) {
   //         console.log(`failed sent to id: ${id} named ${first_name} ${last_name}`)
   //       );
   //   });
+
   bot.start(ctx => {
     ctx.deleteMessage();
     ctx.reply(
@@ -56,6 +57,7 @@ function welcomeMsg(bot) {
       ]).extra()
     );
   });
+
   bot.action("GROUP_RULE", ctx => {
     const { id, first_name, last_name } = ctx.update.callback_query.from;
     bot.telegram
